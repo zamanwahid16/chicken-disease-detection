@@ -25,6 +25,7 @@ list_of_files = [
     "params.yaml",
     "requirements.txt",
     "setup.py",
+    "setup.cfg",
     "environment.yaml",
     "templates/index.html",
     "Makefile",
