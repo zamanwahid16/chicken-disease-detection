@@ -1,22 +1,25 @@
 # module for common utility functions
 
-import os
-import yaml
-import sys
+import base64
 import json
-from chickendisease import logger
-from box.exceptions import BoxValueError
-import joblib
+import os
 from pathlib import Path
 from typing import Any
-import base64
+
+import joblib
+import yaml
+from box import ConfigBox
+from box.exceptions import BoxValueError
+from ensure import ensure_annotations
+
+from chickendisease import logger
 
 
 @ensure_annotations
 def read_yaml(path: Path) -> ConfigBox:
     """
     Read YAML file and return a Box object.
-    
+
     :param path: Path to YAML file.
     :return: Box object.
     """
@@ -25,8 +28,8 @@ def read_yaml(path: Path) -> ConfigBox:
         with open(path, "r") as yaml_file:
             content = yaml.safe_load(yaml_file)
             logger.info(f"Loaded YAML file from {path}")
-            return Box(content)
-    except BoxValueError as e:
+            return ConfigBox(content)
+    except BoxValueError:
         raise BoxValueError(f"Error reading YAML file from {path}")
     except Exception as e:
         raise e
@@ -36,7 +39,7 @@ def read_yaml(path: Path) -> ConfigBox:
 def save_json(path: Path, data: dict) -> None:
     """
     Save data as JSON file.
-    
+
     :param path: Path to save JSON file.
     :param data: Data to save.
     """
@@ -53,7 +56,7 @@ def save_json(path: Path, data: dict) -> None:
 def load_json(path: Path) -> ConfigBox:
     """
     Load JSON file.
-    
+
     :param path: Path to JSON file.
     :return: Loaded JSON file as ConfigBox class.
     """
@@ -71,7 +74,7 @@ def load_json(path: Path) -> ConfigBox:
 def save_binary(path: Path, data: Any) -> None:
     """
     Save data as binary file.
-    
+
     :param path: Path to save binary file.
     :param data: Data to save.
     """
@@ -88,13 +91,13 @@ def save_binary(path: Path, data: Any) -> None:
 def load_binary(path: Path) -> Any:
     """
     Load binary file.
-    
+
     :param path: Path to binary file.
     :return: Loaded binary file.
     """
 
     try:
-        data = joblib.load(binary_file)
+        data = joblib.load(path)
         logger.info(f"Loaded binary file from {path}")
         return data
     except Exception as e:
@@ -105,7 +108,7 @@ def load_binary(path: Path) -> Any:
 def get_size(path: Path) -> str:
     """
     Get file size in KB.
-    
+
     :param path: Path to file.
     :return: File size in KB.
     """
@@ -120,7 +123,7 @@ def get_size(path: Path) -> str:
 def decode_image(img_string: str, file_name: str) -> None:
     """
     Decode image string and save as image file.
-    
+
     :param img_string: Image string.
     :param file_name: Name of image file.
     """
@@ -137,7 +140,7 @@ def decode_image(img_string: str, file_name: str) -> None:
 def encode_image(file_name: str) -> str:
     """
     Encode image file as string.
-    
+
     :param file_name: Name of image file.
     :return: Image string.
     """

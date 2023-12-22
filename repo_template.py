@@ -1,8 +1,8 @@
 # script to create the repo template for the project
 
+import logging
 import os
 from pathlib import Path
-import logging
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -39,10 +39,9 @@ for file in list_of_files:
     if filedir != '':
         os.makedirs(filedir, exist_ok=True)
         logging.info(f"Created directory: {filedir}")
-    
+
     if (not os.path.exists(file)) or (os.path.getsize(file) == 0):
         with open(file, 'w') as f:
             logging.info(f"Created empty file: {file}")
     else:
         logging.info(f"File already exists: {file}")
-
