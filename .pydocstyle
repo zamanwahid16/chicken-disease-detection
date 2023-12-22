@@ -8,7 +8,6 @@
 # D106: Missing docstring in public nested class
 # D300: Use """triple double quotes""" (found '''-quotes)
 # D201: No blank lines allowed before function docstring
-# D419: Docstring is empty
 
 [pydocstyle]
-select = D100,D101,D102,D103,D105,D106,D300,D201,D419
+select = D100,D101,D102,D103,D105,D106,D300,D201

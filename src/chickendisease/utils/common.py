@@ -1,4 +1,4 @@
-# module for common utility functions
+"""module for common utility functions"""
 
 import base64
 import json
@@ -25,12 +25,12 @@ def read_yaml(path: Path) -> ConfigBox:
     """
 
     try:
-        with open(path, "r") as yaml_file:
+        with open(path, 'r') as yaml_file:
             content = yaml.safe_load(yaml_file)
-            logger.info(f"Loaded YAML file from {path}")
+            logger.info(f'Loaded YAML file from {path}')
             return ConfigBox(content)
     except BoxValueError:
-        raise BoxValueError(f"Error reading YAML file from {path}")
+        raise BoxValueError(f'Error reading YAML file from {path}')
     except Exception as e:
         raise e
 
@@ -45,9 +45,9 @@ def save_json(path: Path, data: dict) -> None:
     """
 
     try:
-        with open(path, "w") as json_file:
+        with open(path, 'w') as json_file:
             json.dump(data, json_file, indent=4)
-            logger.info(f"Saved JSON file to {path}")
+            logger.info(f'Saved JSON file to {path}')
     except Exception as e:
         raise e
 
@@ -62,9 +62,9 @@ def load_json(path: Path) -> ConfigBox:
     """
 
     try:
-        with open(path, "r") as json_file:
+        with open(path, 'r') as json_file:
             data = json.load(json_file)
-            logger.info(f"Loaded JSON file from {path}")
+            logger.info(f'Loaded JSON file from {path}')
             return ConfigBox(data)
     except Exception as e:
         raise e
@@ -80,9 +80,9 @@ def save_binary(path: Path, data: Any) -> None:
     """
 
     try:
-        with open(path, "wb") as binary_file:
+        with open(path, 'wb') as binary_file:
             joblib.dump(data, binary_file)
-            logger.info(f"Saved binary file to {path}")
+            logger.info(f'Saved binary file to {path}')
     except Exception as e:
         raise e
 
@@ -98,7 +98,7 @@ def load_binary(path: Path) -> Any:
 
     try:
         data = joblib.load(path)
-        logger.info(f"Loaded binary file from {path}")
+        logger.info(f'Loaded binary file from {path}')
         return data
     except Exception as e:
         raise e
@@ -115,7 +115,7 @@ def get_size(path: Path) -> str:
 
     try:
         size = round(os.path.getsize(path) / 1000)
-        return f"~ {size} KB"
+        return f'~ {size} KB'
     except Exception as e:
         raise e
 
@@ -130,7 +130,7 @@ def decode_image(img_string: str, file_name: str) -> None:
 
     try:
         img_data = base64.b64decode(img_string)
-        with open(file_name, "wb") as f:
+        with open(file_name, 'wb') as f:
             f.write(img_data)
             f.close()
     except Exception as e:
@@ -146,7 +146,7 @@ def encode_image(file_name: str) -> str:
     """
 
     try:
-        with open(file_name, "rb") as f:
+        with open(file_name, 'rb') as f:
             img_string = base64.b64encode(f.read())
             f.close()
             return img_string
