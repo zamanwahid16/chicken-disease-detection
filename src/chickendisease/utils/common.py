@@ -152,3 +152,19 @@ def encode_image(file_name: str) -> str:
             return img_string
     except Exception as e:
         raise e
+
+
+def make_dir(dirs_path_list: list, verbose=True) -> None:
+    """
+    Make directories.
+
+    :param dirs: List of directories to make.
+    """
+
+    try:
+        for dir in dirs_path_list:
+            os.makedirs(dir, exist_ok=True)
+            if verbose:
+                logger.info(f'Created directory at {dir}')
+    except Exception as e:
+        raise e
