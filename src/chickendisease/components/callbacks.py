@@ -11,14 +11,14 @@ class Callbacks:
     """Callbacks Class"""
 
     def __init__(self, config: CallbacksConfig):
-        self.callbacks_config = callbacks_config
+        self.config = config
 
     @property
     def _create_tb_callback(self):
         """Returns the TensorBoard callback."""
         timestamp = time.strftime('%Y-%m-%d-%H-%M-%S')
         tb_logs_dir = os.path.join(
-            self.callbacks_config.tensorboard_logs_dir,
+            self.config.tensorboard_logs_dir,
             f'tb_logs_at_{timestamp}',
         )
         return tf.keras.callbacks.TensorBoard(log_dir=tb_logs_dir)
@@ -27,7 +27,7 @@ class Callbacks:
     def _create_ckpt_callback(self):
         """Returns the Model Checkpoint callback."""
         return tf.keras.callbacks.ModelCheckpoint(
-            filepath=self.callbacks_config.checkpoint_model_path,
+            filepath=str(self.config.checkpoint_model_path),
             save_best_only=True,
         )
 
