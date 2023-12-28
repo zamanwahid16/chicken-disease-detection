@@ -1,7 +1,10 @@
 """Configuration for the project."""
 
+import os
+
 from chickendisease.constants import *
 from chickendisease.entity.config_entity import (BaseModelConfig,
+                                                 CallbacksConfig,
                                                  DataIngestionConfig)
 from chickendisease.utils.common import make_dir, read_yaml
 
@@ -45,3 +48,15 @@ class ConfigurationManager:
             params_classes=self.params.CLASSES
         )
         return base_model_config
+
+    def get_callbacks_config(self) -> CallbacksConfig:
+        """Returns the CallbacksConfig object."""
+        config = self.config.callbacks
+        model_ckpt_dir = os.path.dirname(config.checkpoint_model_path)
+        make_dir([Path(model_ckpt_dir), Path(config.tensorboard_logs_dir)])
+        callbacks_config = CallbacksConfig(
+            root_dir=Path(config.root_dir),
+            tensorboard_logs_dir=Path(config.tensorboard_logs_dir),
+            checkpoint_model_path=Path(config.checkpoint_model_path)
+        )
+        return callbacks_config
