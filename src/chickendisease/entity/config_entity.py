@@ -23,3 +23,11 @@ class BaseModelConfig:
     params_include_top: bool
     params_weights: str
     params_classes: int
+
+
+@dataclass(frozen=True)
+class CallbacksConfig:
+    """Callbacks Config Entity Class"""
+    root_dir: Path
+    tensorboard_logs_dir: Path
+    checkpoint_model_path: Path
