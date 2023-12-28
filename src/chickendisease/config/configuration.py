@@ -5,7 +5,8 @@ import os
 from chickendisease.constants import *
 from chickendisease.entity.config_entity import (BaseModelConfig,
                                                  CallbacksConfig,
-                                                 DataIngestionConfig)
+                                                 DataIngestionConfig,
+                                                 TrainingConfig)
 from chickendisease.utils.common import make_dir, read_yaml
 
 
@@ -60,3 +61,22 @@ class ConfigurationManager:
             checkpoint_model_path=Path(config.checkpoint_model_path)
         )
         return callbacks_config
+
+    def get_training_config(self) -> TrainingConfig:
+        """Returns the TrainingConfig object."""
+        training = self.config.model_training
+        base_model = self.config.base_model
+        params = self.params
+        training_data = os.path.join(self.config.data_ingestion.root_dir, 'chicken_disease_data')
+        make_dir([Path(training.root_dir)])
+        training_config = TrainingConfig(
+            root_dir=Path(training.root_dir),
+            trained_model_path=Path(training.trained_model_path),
+            updated_base_model_path=Path(base_model.updated_base_model_path),
+            training_data=Path(training_data),
+            params_epochs=params.EPOCHS,
+            params_batch_size=params.BATCH_SIZE,
+            params_is_augment=params.IS_AUGMENT,
+            params_image_size=params.IMAGE_SIZE
+        )
+        return training_config
