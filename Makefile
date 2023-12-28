@@ -13,6 +13,6 @@ format:
 	@echo "Running flake8 to check for any other formatting issues"
 	@flake8 .
 
-run-pipeline:
+run:
 	@echo "Running pipeline..."
 	@python -m run_pipeline
