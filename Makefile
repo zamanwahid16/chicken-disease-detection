@@ -12,3 +12,7 @@ format:
 	@isort .
 	@echo "Running flake8 to check for any other formatting issues"
 	@flake8 .
+
+run-pipeline:
+	@echo "Running pipeline..."
+	@python -m run_pipeline
