@@ -27,7 +27,8 @@ if __name__ == '__main__':
         logger.info(f'>>>>> Running pipeline for {STAGE_NAME} <<<<<')
         pipeline = DataIngestionPipeline()
         pipeline.main()
-        logger.info(f'>>>>> Completed pipeline for {STAGE_NAME} <<<<<')
+        logger.info(
+            f'>>>>> Completed pipeline for {STAGE_NAME} <<<<<\n\nx======================x======================x\n\n')
     except Exception as e:
         logger.error(f'Failed to run the pipeline for {STAGE_NAME} with exception: {e}')
         raise e
