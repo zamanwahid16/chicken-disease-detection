@@ -20,3 +20,7 @@ run:
 run-dvc:
 	@echo "Running pipeline with DVC..."
 	@dvc repro
+
+run-app:
+	@echo "Running app..."
+	@python -m app
