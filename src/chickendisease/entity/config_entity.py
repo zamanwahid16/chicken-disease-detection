@@ -44,3 +44,14 @@ class TrainingConfig:
     params_batch_size: int
     params_is_augment: bool
     params_image_size: list
+
+
+@dataclass(frozen=True)
+class EvaluationConfig:
+    """Evaluation Config Entity Class"""
+    root_dir: Path
+    trained_model_path: Path
+    training_data: Path
+    all_params: dict
+    params_batch_size: int
+    params_image_size: list
