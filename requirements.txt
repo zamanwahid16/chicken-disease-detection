@@ -1,6 +1,6 @@
 tensorflow
 # for mac M1 or M2 chip only
-tensorflow-metal
+# tensorflow-metal
 pandas
 dvc
 notebook
