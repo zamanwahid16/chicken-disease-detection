@@ -22,3 +22,7 @@ callbacks:
 model_training:
   root_dir: artifacts/model_training
   trained_model_path: artifacts/model_training/model.h5
+  training_data: artifacts/data_ingestion/chicken_disease_data
+
+model_validation:
+  root_dir: artifacts/model_validation
