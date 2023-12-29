@@ -1,0 +1,53 @@
+stages:
+    data_ingestion:
+        cmd: python src/chickendisease/pipeline/data_ingestion.py
+        deps:
+        - src/chickendisease/pipeline/data_ingestion.py
+        - config/config.yaml
+        outs:
+        - artifacts/data_ingestion/chicken_disease_data
+
+    base_model:
+        cmd: python src/chickendisease/pipeline/base_model.py
+        deps:
+        - src/chickendisease/pipeline/base_model.py
+        - config/config.yaml
+        params:
+          - IMAGE_SIZE
+          - INCLUDE_TOP
+          - CLASSES
+          - WEIGHTS
+          - LEARNING_RATE
+        outs:
+        - artifacts/base_model
+
+    model_training:
+        cmd: python src/chickendisease/pipeline/trainer.py
+        deps:
+        - src/chickendisease/pipeline/trainer.py
+        - src/chickendisease/components/callbacks.py
+        - config/config.yaml
+        - artifacts/data_ingestion/chicken_disease_data
+        - artifacts/base_model
+        params:
+          - IMAGE_SIZE
+          - EPOCHS
+          - BATCH_SIZE
+          - CLASSES
+          - IS_AUGMENT
+        outs:
+        - artifacts/model_training/model.h5
+
+    model_validation:
+        cmd: python src/chickendisease/pipeline/evaluation.py
+        deps:
+        - src/chickendisease/pipeline/evaluation.py
+        - config/config.yaml
+        - artifacts/data_ingestion/chicken_disease_data
+        - artifacts/model_training/model.h5
+        params:
+          - IMAGE_SIZE
+          - BATCH_SIZE
+        metrics:
+          - artifacts/model_validation/scores.json:
+              cache: false

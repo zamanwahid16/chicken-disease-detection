@@ -17,7 +17,7 @@ class EvaluationPipeline:
         """Run the evaluation pipeline."""
         config = ConfigurationManager()
         val_config = config.get_validation_config()
-        evaluation = Evaluation(val_config)
+        evaluation = Evaluation(config=val_config)
         evaluation.evaluate()
         evaluation.save_scores()
 
@@ -25,7 +25,7 @@ class EvaluationPipeline:
 if __name__ == '__main__':
     try:
         logger.info(f'>>>>> Running pipeline for {STAGE_NAME} <<<<<')
-        evaluate = Evaluation()
+        evaluate = EvaluationPipeline()
         evaluate.main()
         logger.info(
             f'>>>>> Completed pipeline for {STAGE_NAME} <<<<<\n\nx======================x======================x\n\n')
