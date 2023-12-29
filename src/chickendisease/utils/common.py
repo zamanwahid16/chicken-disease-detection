@@ -36,14 +36,13 @@ def read_yaml(path: Path) -> ConfigBox:
 
 
 @ensure_annotations
-def save_json(path: Path, data: dict) -> None:
+def save_json(path: Path, data: dict):
     """
     Save data as JSON file.
 
     :param path: Path to save JSON file.
     :param data: Data to save.
     """
-
     try:
         with open(path, 'w') as json_file:
             json.dump(data, json_file, indent=4)
