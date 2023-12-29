@@ -4,8 +4,9 @@ __pycache__/
 *$py.class
 .DS_Store
 
-# output directory
+# outputs
 artifacts/
+*.jpg
 
 # C extensions
 *.so
