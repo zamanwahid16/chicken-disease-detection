@@ -24,9 +24,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
       - name: Lint Code
-        uses: echo "Linting Code"
+        run: echo "Linting Code"
       - name: Run Unit Tests
-        uses: echo "Running Unit Tests"
+        run: echo "Running Unit Tests"
   Build-and-push-ecr-image:
     name: Build and Push ECR Image
     runs-on: ubuntu-latest
