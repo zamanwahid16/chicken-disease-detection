@@ -16,3 +16,7 @@ format:
 run:
 	@echo "Running pipeline..."
 	@python -m run_pipeline
+
+run-dvc:
+	@echo "Running pipeline with DVC..."
+	@dvc repro
