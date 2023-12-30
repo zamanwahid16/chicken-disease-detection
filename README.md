@@ -4,3 +4,7 @@ This project aims to develop a system for detecting diseases in chickens using m
 
 
 ### Steps to run the project
+1. To setup the environment, command `make setup-environment` in the terminal.
+2. To run the training pipeline, run `make run`.
+3. To run the training pipeline with dvc, run `run-dvc`.
+4. To run the web app, run `make run-app`
